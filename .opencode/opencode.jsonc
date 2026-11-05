@@ -1,22 +1,44 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {},
-  "permission": {},
+  "permission": {
+    "$schema": "https://opencode.ai/permission/allow.json",
+    "rules": [
+      { "action": "read", "resource": "**", "effect": "allow" },
+      { "action": "write", "resource": "**", "effect": "allow" },
+      { "action": "edit", "resource": "**", "effect": "allow" },
+      { "action": "execute", "resource": "**", "effect": "allow" }
+    ]
+  },
   "references": {
     "effect": {
       "repository": "github.com/Effect-TS/effect-smol",
-      "description": "Use for Effect v4 and effect-smol implementation details",
+      "description": "Use for Effect v4 and effect-smol implementation details"
     },
     "opencode-local": {
       "path": "~/.local/share/opencode",
-      "description": "Contains opencode logs and data",
-    },
+      "description": "Contains opencode logs and data"
+    }
   },
-  "mcp": {},
+  "mcp": {
+    "servers": {
+      "filesystem": {
+        "type": "local",
+        "command": "opencode-mcp",
+        "args": ["mcp", "filesystem"]
+      },
+      "ssh": {
+        "type": "local",
+        "command": "opencode-mcp",
+        "args": ["mcp", "ssh"]
+      }
+    }
+  },
   "tools": {
-    "github-pr-search": false,
+    "github-triage": false,
+    "github-pr-search": false
   },
   "experimental": {
     "part_rows": true,
-  },
+  }
 }
