@@ -13,19 +13,6 @@
       }
     }
   },
-  "provider": {
-    "ollama-vps": {
-      "name": "Ollama (VPS)",
-      "baseURL": "http://202.157.140.206:11434/v1",
-      "apiKey": "{env:OLLAMA_API_KEY}",
-      "models": {
-        "ollama-vps/deepseek-r1:7b": {
-          "name": "DeepSeek R1 7B (VPS)",
-          "limit": { "context": 64000 }
-        }
-      }
-    }
-  },
   "permission": {
     "$schema": "https://opencode.ai/permission/allow.json",
     "rules": [
