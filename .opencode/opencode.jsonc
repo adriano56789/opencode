@@ -16,10 +16,10 @@
   "provider": {
     "ollama-vps": {
       "name": "Ollama (VPS)",
-      "baseURL": "http://<VPS-IP>:11434/v1",
+      "baseURL": "http://202.157.140.206:11434/v1",
       "apiKey": "{env:OLLAMA_API_KEY}",
       "models": {
-        "deepseek-r1:7b": {
+        "ollama-vps/deepseek-r1:7b": {
           "name": "DeepSeek R1 7B (VPS)",
           "limit": { "context": 64000 }
         }
