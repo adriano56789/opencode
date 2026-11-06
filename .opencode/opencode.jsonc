@@ -8,7 +8,11 @@
       "models": {
         "deepseek-r1:7b": {
           "name": "DeepSeek R1 7B",
-          "limit": { "context": 64000 }
+          "limit": { "context": 16384 }
+        },
+        "qwen2.5:7b-instruct": {
+          "name": "Qwen 2.5 7B",
+          "limit": { "context": 16384 }
         }
       }
     }
