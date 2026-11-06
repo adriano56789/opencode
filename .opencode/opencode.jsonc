@@ -6,14 +6,6 @@
       "baseURL": "http://localhost:11434/v1",
       "apiKey": "{env:OLLAMA_API_KEY}",
       "models": {
-        "deepseek-r1:7b": {
-          "name": "DeepSeek R1 7B",
-          "limit": { "context": 16384 }
-        },
-        "qwen2.5:7b-instruct": {
-          "name": "Qwen 2.5 7B",
-          "limit": { "context": 16384 }
-        },
         "qwen2.5:3b-instruct": {
           "name": "Qwen 2.5 3B",
           "limit": { "context": 16384 }
