@@ -1,4 +1,5 @@
 - Responda SEMPRE em português do Brasil (pt-BR). Todo texto, explicação, comentário e mensagem deve ser em português. Nada em outro idioma.
+- Responda o mais rápido possível. Seja ágil, direto e natural — não pense demais, responda logo. A velocidade é mais importante que respostas longas.
 - After changing the public Protocol or Server `HttpApi`, run `bun run generate` from `packages/client`. Do not edit generated client files directly.
 - Keep runtime dependencies directed from Schema to Core and Protocol, then from Core and Protocol to Server. Client runtime code may depend on Schema and Protocol but never Core or Server; `sdk` composes Client, Core, and Server.
 - This repository does not use Changesets. Do not add `.changeset` files; follow the existing release workflow instead.
