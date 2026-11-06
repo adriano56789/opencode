@@ -1,14 +1,13 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "permission": {
-    "$schema": "https://opencode.ai/permission/allow.json",
-    "rules": [
-      { "action": "read", "resource": "**", "effect": "allow" },
-      { "action": "write", "resource": "**", "effect": "allow" },
-      { "action": "edit", "resource": "**", "effect": "allow" },
-      { "action": "execute", "resource": "**", "effect": "allow" }
-    ]
-  },
+  "permissions": [
+    { "action": "read", "resource": "**", "effect": "allow" },
+    { "action": "write", "resource": "**", "effect": "allow" },
+    { "action": "edit", "resource": "**", "effect": "allow" },
+    { "action": "execute", "resource": "**", "effect": "allow" },
+    { "action": "shell", "resource": "*", "effect": "allow" },
+    { "action": "bash", "resource": "*", "effect": "allow" }
+  ],
   "mcp": {
     "servers": {
       "filesystem": {
