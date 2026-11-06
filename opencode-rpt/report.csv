@@ -1,0 +1,12 @@
+Area,Status,Detail
+OpenCode fork clone,UNFINISHED,/tmp/opencode empty, no .git; clone never executed on VPS; directory must be created first
+OpenCode install/compile/start,UNFINISHED,no cloned fork; compile and startup requires fork source
+systemd persistence,UNFINISHED,OpenCode service not aligned with fork config; needs unit and enable
+Windows-to-VPS reachability,CONDITIONAL,SSH command gateway works via CONNECT_OK; safe tunnel only if SSH auth is proven
+Ollama service,OK,active, User=ollama, OLLAMA_HOST=172.16.8.1:11434
+Ollama model,OK,deepseek-r1:7b present; 7.6B Q4_K_M; context 131072; tools/thinking/completion
+Ollama model discovery,OK,curl http://127.0.0.1:11434/api/tags returns deepseek-r1:7b with HTTP 200
+Config endpoints,OK,opencode.jsonc has ollama local and ollama-vps with real IP 202.157.140.206
+SSH authentication,UNRESOLVED,direct root@2.25.192.154: Permission denied; only CONNECT_OK-gated commands work
+Remote workspace backend,MISSING,fork has no V2 remote workspace backend; /app/backend not reachable through the fork UI
+Remote workspace validation,TESTS SKIPPED,Remote workspace tests 6-11 cannot run without backend

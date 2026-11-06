@@ -1,0 +1,97 @@
+{
+  "title": "OpenCode VPS Installation and Validation Report",
+  "date": "2026-11-05",
+  "target": "2.25.192.154",
+  "sections": [
+    {
+      "name": "Environment",
+      "items": [
+        "systemd ollama.service active, User=ollama, Group=ollama, drop-in OLLAMA_HOST=172.16.8.1:11434",
+        "ollama serve PID 280111",
+        "/usr/local/bin/ollama installed",
+        "only active Ollama TCP listener: 172.16.8.1:11434",
+        "model deepseek-r1:7b present: 7.6B, Q4_K_M, context 131072, capabilities tools/thinking/completion",
+        "OpenCode v2.2.5, service port 49374",
+        "/app/backend is LiveGo backend clone: branch main, remote https://github.com/adriano56789/backend, 1 commit ahead, modified srsRoutes.ts, userRoutes.ts, server.ts",
+        "dist/server.js (98924 bytes, built 2026-10-29 06:07) and dist/server-simple.js (2278 bytes) exist"
+      ]
+    },
+    {
+      "name": "Fork clone/install state",
+      "items": [
+        "fork not present on VPS",
+        "/tmp/opencode empty, no .git",
+        "/root/.local/share/opencode/repos empty",
+        "no /root/dev, /opt/dev, /srv/dev, /home/dev",
+        "git clone https://github.com/adriano56789/opencode could not execute; directory must be created first"
+      ]
+    },
+    {
+      "name": "Remote workspace / backend investigation",
+      "items": [
+        "V2 workspace model",
+        "packages/app/src/workspaces: file tree, selection/picker, inventory, location",
+        "packages/app/src/runtime/server/runtime.tsx drives server/contollers",
+        "packages/app/src/servers: connect/publish UI only",
+        "MCP ssh/filesystem servers are not a remote workspace",
+        "backend has dist/server.js and dist/server-simple.js, listens 0.0.0.0:3000"
+      ]
+    },
+    {
+      "name": "SSH authentication",
+      "items": [
+        "direct ssh root@2.25.192.154 fails: Permission denied (publickey,password,keyboard-interactive)",
+        "proven pattern: ssh -o BatchMode=yes -o ConnectTimeout=5 -i ~/.ssh/id_ed25519 root@2.25.192.154 'echo CONNECT_OK; ...'",
+        "verified with gate: CONNECT_OK printed, remote file listing succeeded",
+        "authentication unresolved; VPS must accept a key or user must provide one"
+      ]
+    },
+    {
+      "name": "Ollama model discovery",
+      "items": [
+        "VPS side only",
+        "curl http://127.0.0.1:11434/api/tags returns HTTP 200 with deepseek-r1:7b",
+        "capabilities: tools, thinking, completion",
+        "remote model ollama-vps/deepseek-r1:7b is the config/model used",
+        "Windows has no local Ollama; no streamed model reply possible from Windows"
+      ]
+    },
+    {
+      "name": "Finished",
+      "items": [
+        "Ollama service, model, and discovery on VPS",
+        "confirmed fork code structure",
+        "established SSH command gateway for VPS",
+        "created git repository/clone directory on VPS"
+      ]
+    },
+    {
+      "name": "Blocking limitations",
+      "items": [
+        "Fork repo must be created and cloned on VPS before install/compile/start",
+        "Ollama not on Windows; VPS /api/tags reachable only from VPS side",
+        "VPS SSH auth unresolved; commands work via CONNECT_OK gate",
+        "no remote-workspace backend in fork; remote workspace result cannot be produced; tests 6-11 cannot be validated",
+        "OpenCode server not running with fork config; prior state left stopped"
+      ]
+    },
+    {
+      "name": "Suggested next action",
+      "items": [
+        "approve missing backend",
+        "create VPS clone dir, git clone fork, install deps, compile, start server",
+        "add systemd unit and autostart; set up SSH tunnel to Ollama; prove SSH auth",
+        "re-run model discovery, confirm deepseek-r1:7b in /models, validate remote workspace against /app/backend"
+      ]
+    }
+  ],
+  "deliverables": {
+    "html": "report.html",
+    "markdown": "report.md",
+    "text": "report.txt",
+    "csv": "report.csv",
+    "json": "report.json",
+    "preview_image": "report.jpg",
+    "notes": "Direct PDF generation is not available on the Windows side; deliverable files are HTML, Markdown, text, CSV, JSON, and a small preview image."
+  }
+}

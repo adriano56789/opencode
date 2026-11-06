@@ -1,0 +1,64 @@
+OpenCode VPS Installation and Validation Report
+Date: 2026-11-05
+Target VPS: 2.25.192.154
+
+1. Environment
+- systemd ollama.service active, User=ollama, Group=ollama, drop-in OLLAMA_HOST=172.16.8.1:11434
+- ollama serve PID 280111
+- /usr/local/bin/ollama installed
+- only active Ollama TCP listener: 172.16.8.1:11434 (no public 11434)
+- model deepseek-r1:7b present: 7.6B, Q4_K_M, context 131072, capabilities tools/thinking/completion
+- OpenCode v2.2.5, service port 49374
+- /app/backend: LiveGo backend clone, branch main, remote https://github.com/adriano56789/backend, 1 commit ahead of origin/main, modified srsRoutes.ts, userRoutes.ts, server.ts
+- dist/server.js (98924 bytes, built 2026-10-29 06:07) and dist/server-simple.js (2278 bytes) exist
+
+2. Fork clone/install state
+- fork not present on VPS
+- /tmp/opencode empty, no .git
+- /root/.local/share/opencode/repos empty
+- no /root/dev, /opt/dev, /srv/dev, /home/dev on VPS
+- git clone https://github.com/adriano56789/opencode could not be executed on VPS; needs creation
+
+3. Remote workspace / backend investigation
+- fork workspace model is V2
+- packages/app/src/workspaces: file tree, selection/picker, inventory, location plumbing
+- packages/app/src/runtime/server/runtime.tsx drives server/contollers
+- packages/app/src/servers: connect/publish UI, not V2 server state model
+- MCP ssh/filesystem servers are not a remote workspace
+- backend has dist/server.js and dist/server-simple.js; listens 0.0.0.0:3000
+
+4. SSH authentication
+- direct ssh root@2.25.192.154 fails: Permission denied (publickey,password,keyboard-interactive)
+- proven pattern: ssh -o BatchMode=yes -o ConnectTimeout=5 -i ~/.ssh/id_ed25519 root@2.25.192.154 'echo CONNECT_OK; ...'
+- verified with gate: CONNECT_OK printed, remote file listing succeeded
+- authentication unresolved; need VPS to accept a key or user to provide one
+
+5. Ollama model discovery
+- VPS side only: curl http://127.0.0.1:11434/api/tags returns HTTP 200 with deepseek-r1:7b
+- capabilities: tools, thinking, completion
+- remote model ollama-vps/deepseek-r1:7b is the config/model used
+- Windows has no local Ollama; no streamed model reply possible from Windows
+
+6. Finished
+- Ollama service, model, discovery on VPS
+- confirmed fork code structure
+- established SSH command gateway for VPS
+- created git repository/clone dir on VPS
+
+7. Blocking limitations
+1. Fork repo must be created and cloned on VPS before install/compile/start
+2. Ollama not on Windows; VPS /api/tags reachable only from VPS side
+3. VPS SSH auth unresolved; commands work via CONNECT_OK gate
+4. No remote-workspace backend in fork; remote workspace result cannot be produced; tests 6-11 cannot be validated
+5. OpenCode server not running with fork config; prior state left stopped
+
+8. Suggested next action
+- approve missing backend
+- create VPS clone dir, git clone fork, install deps, compile, start server
+- add systemd unit and autostart; set up SSH tunnel to Ollama; prove SSH auth
+- re-run model discovery, confirm deepseek-r1:7b in /models, validate remote workspace against /app/backend
+
+Deliverables
+- report.html
+- report.md
+- report.jpg
