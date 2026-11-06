@@ -2,10 +2,6 @@
   "$schema": "https://opencode.ai/config.json",
   "permissions": [
     { "action": "read", "resource": "**", "effect": "allow" },
-    { "action": "edit", "resource": "packages/app/**", "effect": "allow" },
-    { "action": "write", "resource": "packages/app/**", "effect": "allow" },
-    { "action": "edit", "resource": "packages/ui/**", "effect": "allow" },
-    { "action": "write", "resource": "packages/ui/**", "effect": "allow" },
     { "action": "edit", "resource": "**", "effect": "ask" },
     { "action": "write", "resource": "**", "effect": "ask" },
     { "action": "execute", "resource": "*", "effect": "ask" },
